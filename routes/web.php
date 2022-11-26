@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\SiswaController;
-use App\Models\Siswa;
-use Carbon\Carbon;
-use GuzzleHttp\Psr7\Request;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +21,10 @@ Route::get('/', function () {
 });
 
 Route::get('/absen', [AbsenController::class, 'absen']);
-Route::get('/', [AbsenController::class, 'index']);
+Route::get('/dashboard', [AbsenController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 Route::post('/absen/post', [AbsenController::class,'post']);
 
 Route::get('/siswa', [SiswaController::class, 'index']);

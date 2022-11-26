@@ -8,12 +8,16 @@
 </head>
 <body>
     <div class="container">
-        <a href="/siswa" class="btn btn-dark">Siswa</a>
-        <a href="/absen" class="btn btn-dark">Absen</a>
-        @if (Auth::check()){
-            <a href="/logout" class="btn btn-dark"> Logout</a>
-        }@else
-        <a href="/login" class="btn btn-dark"> Login </a>
+        <div class="d-flex">
+            <a href="/siswa" class="btn btn-dark">Siswa</a>
+            <a href="/absen" class="btn btn-dark">Absen</a>
+            @if (Auth::check())
+            <form action="/logout" method="post">
+                @csrf
+            <button class="btn btn-dark" type="submit">Logout</button>
+            </form>
+        </div>
+        {{-- <a href="/absen" class="btn btn-dark">Logout</a> --}}
         @endif
         <div class="card mt-4">
             <div class="card-body">

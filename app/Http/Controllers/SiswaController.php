@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
@@ -14,6 +15,9 @@ class SiswaController extends Controller
      */
     public function index()
     {
+        if(!Auth::check()){
+            return view('/');
+        }
         $siswa = Siswa::all();
         return view('siswa.index', compact('siswa'));
     }
@@ -25,6 +29,9 @@ class SiswaController extends Controller
      */
     public function create()
     {
+        if(!Auth::check()){
+            return view('/');
+        }
         return view('siswa.create');
     }
 
@@ -36,6 +43,9 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::check()){
+            return view('/');
+        }
         $request->validate([
             'nama' => 'required',
             'email' => 'nullable',

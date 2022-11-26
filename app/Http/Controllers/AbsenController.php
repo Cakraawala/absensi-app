@@ -6,6 +6,7 @@ use App\Models\Absensi;
 use App\Models\Siswa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AbsenController extends Controller
 {
@@ -15,12 +16,18 @@ class AbsenController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+        if(!Auth::check()){
+            return view('/');
+        }
         $absens = Absensi::orderby('id_absensi','desc')->get();
         $absennow = Absensi::where('tanggal', Carbon::now()->format('Y/m/d'))->get();
         return view('index', compact('absens','absennow'));
     }
     public function absen()
     {
+        if(!Auth::check()){
+            return view('/');
+        }
         $siswa = Siswa::all();
         $tgl = Carbon::now();
         return view('absen', compact('siswa', 'tgl'));
@@ -44,6 +51,9 @@ class AbsenController extends Controller
      */
     public function post(Request $request)
     {
+        if(!Auth::check()){
+            return view('/');
+        }
         // dd($request);
         $request->validate([
             'id_siswa' => 'required',

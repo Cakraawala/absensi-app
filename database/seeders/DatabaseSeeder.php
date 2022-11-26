@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -155,6 +156,10 @@ class DatabaseSeeder extends Seeder
         Siswa::create([
             'nama' => 'Wawan Badru Tamam'
         ]);
-
+        User::create([
+            'username' => 'admin',
+            'nama' => 'Admin',
+            'password' => bcrypt('admin1')
+        ]);
     }
 }

@@ -23,7 +23,9 @@ class User extends Authenticatable
     //     'password',
     // ];
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id_admin'];
+    protected $primaryKey = 'id_admin';
+    protected $table = 'users';
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,9 +43,6 @@ class User extends Authenticatable
      */
     protected $casts = [
     'email_verified_at' => 'datetime',
-    'created_at' => 'datetime:d-m-Y',
-    'updated_at' => 'datetime:d-m-Y',
-    'deleted_at' => 'datetime:d-m-Y h:i:s',
-    'tanggal' => 'datetime:d-m-Y'
+
     ];
 }
