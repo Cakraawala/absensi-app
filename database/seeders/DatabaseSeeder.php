@@ -185,28 +185,44 @@ class DatabaseSeeder extends Seeder
         ]);
         Absensi::create([
             'id_siswa' => rand(1,44),
-            'tanggal' => Carbon::yesterday()->format('Y/m/d'),
+            'tanggal' => Carbon::now()->format('Y/m/d'),
+            'keterangan' => 'Sakit'
+        ]);
+        $carbon = Carbon::now();
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => $carbon->addMonth()->format('Y/m/d'),
+            'keterangan' => 'Ijin'
+        ]);
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => $carbon->addMonth()->format('Y/m/d'),
             'keterangan' => 'Sakit'
         ]);
         Absensi::create([
             'id_siswa' => rand(1,44),
-            'tanggal' => Carbon::yesterday()->format('Y/m/d'),
-            'keterangan' => 'Ijin'
-        ]);
-        Absensi::create([
-            'id_siswa' => rand(1,44),
-            'tanggal' => Carbon::now()->format('Y/m/d'),
-            'keterangan' => 'Ijin'
-        ]);
-        Absensi::create([
-            'id_siswa' => rand(1,44),
-            'tanggal' => Carbon::now()->format('Y/m/d'),
+            'tanggal' => $carbon->addMonth()->format('Y/m/d'),
             'keterangan' => 'Sakit'
         ]);
         Absensi::create([
-            'id_siswa' => rand(1,44),
-            'tanggal' => Carbon::now()->format('Y/m/d'),
+            'id_siswa' => 1,
+            'tanggal' => $carbon->addDays(1)->format('Y/m/d'),
             'keterangan' => 'Ijin'
+        ]);
+        Absensi::create([
+            'id_siswa' => 1,
+            'tanggal' => $carbon->addDays(2)->format('Y/m/d'),
+            'keterangan' => 'Ijin'
+        ]);
+        Absensi::create([
+            'id_siswa' => 1,
+            'tanggal' => $carbon->addDays(3)->format('Y/m/d'),
+            'keterangan' => 'Sakit'
+        ]);
+        Absensi::create([
+            'id_siswa' => 2,
+            'tanggal' => $carbon->addDays(3)->format('Y/m/d'),
+            'keterangan' => 'Sakit'
         ]);
     }
 }

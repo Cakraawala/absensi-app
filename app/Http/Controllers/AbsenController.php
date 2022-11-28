@@ -141,4 +141,30 @@ class AbsenController extends Controller
     {
         //
     }
+
+    public function report(){
+        if(!Auth::check()){
+            return redirect('/');
+        }
+        $absen = Absensi::get();
+        return view('report', compact('absen'));
+    }
+    public function reportsearch(Request $request){
+        if(!Auth::check()){
+            return redirect('/');
+        }
+        $from = $request->from;
+        $to = $request->to;
+        // dd($cari);
+        $absen = Absensi::whereBetween('tanggal', [$from,$to])->get();
+        $siswa = [];
+        foreach($absen as $tes => $value){
+            $siswa[] = $value->siswa->nama;
+
+        }
+        // dd($siswa[0]);
+        $s = Siswa::rightJoin('absensis', 'siswas.id_siswa', '=', 'absensis.id_siswa')->whereBetween('tanggal', [$from, $to])->where('nama', $siswa)->where('keterangan', 'Ijin')->count();
+        // dd($siswa);
+        return view('report', compact('absen', 'request', 'from', 'to'));
+    }
 }

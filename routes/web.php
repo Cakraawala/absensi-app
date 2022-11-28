@@ -34,3 +34,6 @@ Route::get('/siswa/{id_siswa}/update', [SiswaController::class, 'update']);
 Route::post('/siswa', [SiswaController::class, 'store']);
 Route::post('/siswa/{id}/update', [SiswaController::class, 'update']);
 Route::any('/siswa/{id_siswa}/delete', [SiswaController::class, 'destroy']);
+
+Route::get('/report', [AbsenController::class, 'report']);
+Route::get('/report/cari', [AbsenController::class, 'reportsearch']);
