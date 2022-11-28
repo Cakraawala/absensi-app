@@ -1,31 +1,51 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <title>Document</title>
+	<title>Cakra | Login</title>
+	<link rel="stylesheet" type="text/css" href="/loginn/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 </head>
 <body>
-    <div class="container mt-4">
-        <form action="/login" method="POST">
-            @csrf
-            <div class="col-md-5">
-                <div class="card">
-                    <div class="card-header">
-                        LOGIN
-                    </div>
-                    <div class="card-body">
-
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" id="username" class="form-control" name="username" placeholder=" USERNAME ">
-                        <label for="Password" class="form-label">Password</label>
-                        <input type="password" id="Password" class="form-control" name="password" placeholder="*******">
-                    <button class="btn btn-dark mt-4"> SUBMIT </button>
-                    </div>
+	<img class="wave" src="/loginn/img/wave.png">
+	<div class="container">
+		<div class="img">
+			<img src="/loginn/img/bg.svg">
+		</div>
+		<div class="login-content">
+			<form action="/login" method="post">
+                @csrf
+				<img src="/loginn/img/avatar.svg">
+				<h2 class="title">Login</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<input type="username" name="username" id="username" required autofocus @if(Cookie::has('username')) value="{{ Cookie::get('username') }}" @endif class="input" placeholder="Username">
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i">
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<input type="password" name="password" id="password" required class="input" placeholder="Password" @if(Cookie::has('password')) value="{{ Cookie::get('password') }}" @endif>
+            	   </div>
+            	</div>
+                <div class="form-group text-end">
+                    <label for="remember"> Remember me</label>
+                    <input type="checkbox" @if(Cookie::has('username')) checked @endif   name="remember" value="1">
                 </div>
-            </div>
-        </form>
+            	{{-- <a href="/register" class="nav-link">Register?</a> --}}
+            	<input type="submit" class="btn" value="login">
+            </form>
+        </div>
     </div>
+    <script type="text/javascript" src="/loginn/js/main.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    @include('sweetalert::alert')
 </body>
 </html>

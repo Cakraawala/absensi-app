@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Absensi;
 use App\Models\Siswa;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -160,6 +162,51 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'nama' => 'Admin',
             'password' => bcrypt('admin1')
+        ]);
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => Carbon::yesterday()->format('Y/m/d'),
+            'keterangan' => 'Ijin'
+        ]);
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => Carbon::yesterday()->format('Y/m/d'),
+            'keterangan' => 'Sakit'
+        ]);
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => Carbon::yesterday()->format('Y/m/d'),
+            'keterangan' => 'Ijin'
+        ]);
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => Carbon::yesterday()->format('Y/m/d'),
+            'keterangan' => 'Ijin'
+        ]);
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => Carbon::yesterday()->format('Y/m/d'),
+            'keterangan' => 'Sakit'
+        ]);
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => Carbon::yesterday()->format('Y/m/d'),
+            'keterangan' => 'Ijin'
+        ]);
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => Carbon::now()->format('Y/m/d'),
+            'keterangan' => 'Ijin'
+        ]);
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => Carbon::now()->format('Y/m/d'),
+            'keterangan' => 'Sakit'
+        ]);
+        Absensi::create([
+            'id_siswa' => rand(1,44),
+            'tanggal' => Carbon::now()->format('Y/m/d'),
+            'keterangan' => 'Ijin'
         ]);
     }
 }
