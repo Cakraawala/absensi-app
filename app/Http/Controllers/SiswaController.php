@@ -16,7 +16,7 @@ class SiswaController extends Controller
     public function index()
     {
         if(!Auth::check()){
-            return view('/');
+            return redirect('/');
         }
         $siswa = Siswa::all();
         return view('siswa.index', compact('siswa'));
@@ -30,7 +30,7 @@ class SiswaController extends Controller
     public function create()
     {
         if(!Auth::check()){
-            return view('/');
+            return redirect('/');
         }
         return view('siswa.create');
     }
@@ -44,7 +44,7 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         if(!Auth::check()){
-            return view('/');
+            return redirect('/');
         }
         $request->validate([
             'nama' => 'required',

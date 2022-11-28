@@ -24,7 +24,7 @@
                                 <label for="email" class="mt-3 form-label"> Email <span style="font-style: italic;">(required)</span></label>
                                 <input type="text" class="form-control" name="email" id="email" autofocus placeholder="Jamal@gmail.com">
                                 <label for="notelp" class="mt-2 form-label"> No Telepon <span style="font-style: italic;">(required)</span></label>
-                                <input type="text" class="form-control" name="notelp" id="notelp" autofocus placeholder="0869696969">
+                                <input type="number" class="form-control" name="notelp" id="notelp" autofocus placeholder="0869696969">
                             </div>
 
                             <div class="col-md-6">

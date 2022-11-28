@@ -7,6 +7,7 @@ use App\Models\Siswa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AbsenController extends Controller
 {
@@ -17,7 +18,7 @@ class AbsenController extends Controller
      */
     public function index(){
         if(!Auth::check()){
-            return view('/');
+            return redirect('/');
         }
         $absens = Absensi::orderby('id_absensi','desc')->get();
         $absennow = Absensi::where('tanggal', Carbon::now()->format('Y/m/d'))->get();
@@ -25,12 +26,44 @@ class AbsenController extends Controller
     }
     public function absen()
     {
+
         if(!Auth::check()){
-            return view('/');
+            return redirect('/');
         }
-        $siswa = Siswa::all();
+        $today = Carbon::now()->format('Y/m/d');
+        $loop = [];
+        $s = Siswa::rightJoin('absensis', 'siswas.id_siswa', '=', 'absensis.id_siswa')->where('tanggal', $today)->get();
+        foreach($s as $ss => $value){
+            $loop[] = $value->nama;
+        }
+        $siswa = Siswa::whereNotIn('nama',$loop)->get();
         $tgl = Carbon::now();
-        return view('absen', compact('siswa', 'tgl'));
+        // dd($users);
+
+
+        // dd($loop);
+        // $chart1 = Absensi::orderBy('id_absensi', 'asc')->get()->groupby(function ($chart1) {
+        //     return Carbon::parse($chart1->tanggal)->format('M');
+        // });
+
+        // $months = [];
+        // foreach($chart1 as $month => $value){
+        //     $months[] = $month;
+        //     // $p = [];
+        //     // foreach($value as $sp => $value1){
+        //     //     $p[] = $value1->tanggal;
+        //     // }
+        // }
+        // // dd($p);
+        // $reportmonth = Absensi::where('tanggal', $months)->get();
+
+        // dd($reportmonth);
+        // dd($chart1);
+        // dd($loop);
+        // $tes = Siswa::whereRaw('nama NOT IN(".$loop")')->get();
+        // dd($tes);
+
+        return view('absen', compact('siswa', 'tgl', 's'));
     }
 
     /**
@@ -52,7 +85,7 @@ class AbsenController extends Controller
     public function post(Request $request)
     {
         if(!Auth::check()){
-            return view('/');
+            return redirect('/');
         }
         // dd($request);
         $request->validate([
