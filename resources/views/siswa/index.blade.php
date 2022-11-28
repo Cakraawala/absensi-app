@@ -27,7 +27,10 @@
                <td width=15%> {{ $s->notelp}}</td>
                <td> {{ $s->alamat }}</td>
                <td width=10%>
-                <a href="" class="btn btn-outline-secondary"></a>
+                <div class="d-flex">
+                    <a href="/siswa/{{ $s->id_siswa }}" class="btn btn-outline-secondary">EDIT</a>
+                    <a href="/siswa/{{ $s->id_siswa }}/delete" class="ms-2 btn btn-outline-danger">DELETE</a>
+                </div>
                </td>
            </tr>
            @endforeach

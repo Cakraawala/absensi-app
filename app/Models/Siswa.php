@@ -13,7 +13,7 @@ class Siswa extends Model
         return $this->hasMany(Absensi::class);
     }
 
-
+    protected $primaryKey = 'id_siswa';
     protected $casts = [
     'tanggal' => 'datetime:d-m-Y'];
 }

@@ -74,9 +74,14 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_siswa)
     {
-        //
+        if(!Auth::check()){
+            return redirect('/');
+        }
+        $siswa = Siswa::findOrFail($id_siswa);
+        // dd($siswa);
+        return view('siswa.show', compact('siswa'));
     }
 
     /**
@@ -86,9 +91,14 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_siswa)
     {
-        //
+        if(!Auth::check()){
+            return redirect('/');
+        }
+        $siswa = Siswa::findOrFail($id_siswa);
+        $siswa->update($request->all());
+        return redirect('/siswa');
     }
 
     /**
@@ -97,8 +107,14 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_siswa)
     {
-        //
+        if(!Auth::check()){
+            return redirect('/');
+        }
+        $siswa = Siswa::findOrFail($id_siswa);
+        // dd($siswa);
+        $siswa->delete($siswa);
+        return back();
     }
 }

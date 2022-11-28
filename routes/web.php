@@ -29,6 +29,8 @@ Route::post('/absen/post', [AbsenController::class,'post']);
 
 Route::get('/siswa', [SiswaController::class, 'index']);
 Route::get('/siswa/create', [SiswaController::class ,'create']);
-Route::get('/siswa/{id}', [SiswaController::class, 'edit']);
+Route::get('/siswa/{id_siswa}', [SiswaController::class, 'edit']);
+Route::get('/siswa/{id_siswa}/update', [SiswaController::class, 'update']);
 Route::post('/siswa', [SiswaController::class, 'store']);
 Route::post('/siswa/{id}/update', [SiswaController::class, 'update']);
+Route::any('/siswa/{id_siswa}/delete', [SiswaController::class, 'destroy']);
