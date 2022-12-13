@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SiswaController extends Controller
 {
@@ -53,8 +54,9 @@ class SiswaController extends Controller
             'alamat' => 'nullable'
         ]);
         Siswa::create($request->all());
+        Alert::success('Success', 'Data berhasil ditambah');
         return redirect('/siswa');
-        dd($request);
+        // dd($request);
     }
 
     /**
@@ -97,7 +99,9 @@ class SiswaController extends Controller
             return redirect('/');
         }
         $siswa = Siswa::findOrFail($id_siswa);
+        // dd($siswa);
         $siswa->update($request->all());
+        Alert::success('Success', 'Data berhasil Di Update');
         return redirect('/siswa');
     }
 
@@ -113,8 +117,9 @@ class SiswaController extends Controller
             return redirect('/');
         }
         $siswa = Siswa::findOrFail($id_siswa);
-        // dd($siswa);
+        // dd($siswa->with('absensis'));
         $siswa->delete($siswa);
+        Alert::success('Success', 'Data berhasil dihapus');
         return back();
     }
 }

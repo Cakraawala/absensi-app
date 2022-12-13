@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -24,12 +25,13 @@ class LoginController extends Controller
                 Cookie::queue('password', $request->password, $minutes);}
             // dd($tes);
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard')->with('success','Login anda berhasil, Welcome back');
+            $user = Auth()->user()->nama;
+            Alert::success('Success', 'Selamat Datang '.$user);
+            return redirect()->intended('/dashboard');
             // Alert::success('Success', 'Login berhasil');
         }
-        return back()->withErrors([
-            'password' => 'Wrong username or password',
-        ]);
+        Alert::Error('Error', 'Login Gagal');
+        return back();
     }
 
     public function logout(Request $request)

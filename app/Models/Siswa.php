@@ -10,7 +10,7 @@ class Siswa extends Model
     use HasFactory;
     protected $guarded = ['id'];
     public function absensis(){
-        return $this->hasMany(Absensi::class);
+        return $this->hasMany(Absensi::class,'id_siswa');
     }
 
     protected $primaryKey = 'id_siswa';

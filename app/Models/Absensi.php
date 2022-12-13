@@ -9,8 +9,8 @@ class Absensi extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
-
+    protected $guarded = ['id_absensi'];
+    protected $primaryKey = 'id_absensi';
     public function siswa(){
         return $this->belongsTo(Siswa::class,'id_siswa','id_siswa');
     }

@@ -1,13 +1,10 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <title>Document</title>
-    {{-- <title>Document</title> --}}
-</head>
-<body>
+@extends('layout.main')
+
+@section('title')
+<title>Cakra | Edit data {{ $siswa->nama }}</title>
+@endsection
+@section('content')
+
     <div class="container">
         <div class="card mt-3">
             <div class="card-header">
@@ -35,10 +32,9 @@
 
 
                         </div>
-                                <button class="btn btn-dark MT-4" type="submit">SUBMIT</button>
+                                <button class="btn btn-dark float-right mt-4" type="submit">SUBMIT</button>
             </form>
             </div>
         </div>
     </div>
-</body>
-</html>
+    @endsection

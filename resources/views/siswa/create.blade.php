@@ -1,6 +1,6 @@
 @extends('LAYOUT.MAIN')
 @section('title')
-<title> Create SISWA </title>
+<title> Cakra | Create SISWA </title>
 @endsection
 @section('content')
 

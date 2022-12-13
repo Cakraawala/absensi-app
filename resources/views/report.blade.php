@@ -1,10 +1,10 @@
 @extends('layout.main')
 
 @section('title')
-<title> Report </title>
+<title> Cakra | Report </title>
 <style>
     @media print{
-        .waktu,.heder,.btn{display: none;}
+       .sticky-footer,.waktu,.heder,.btn{display: none;}
         #navbar{display: none}
     }
 </style>
@@ -34,31 +34,39 @@
                     </div>
                 </div>
                     </form>
-                    <div class="mb-4">
-                        <h4> Dari Tanggal : {{ Request::is('report/cari*') ? $from : ''}}</h4>
-                        <h4> Sampai Tanggal : {{ Request::is('report/cari*') ? $to : ''}}</h4>
-
+                    <div class="mt-2">
+                    <h3 style="text-align : center;margin-bottom:30px;"> Laporan Absensi </h3>
+                        <h6> Dari Tanggal : {{$from}}</h6>
+                        <h6> Sampai Tanggal : {{$to}}</h6>
                     </div>
 
 
-            <table style="margin-top: 100px" class="table table-bordered" id="myTable">
+            <div class="MyTable">
+
+                <table style="margin-top: 20px" class="table table-bordered" >
+            </div>
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Nama</th>
-                       <th> Keterangan </th>
-                    </tr>
+                       <th> Ijin </th>
+                       <th> Sakit </th>
+                       <th> Alfa </th>
+                     </tr>
                 </thead>
                 <tbody>
                     @php
                         $no = 1;
                     @endphp
-                    @if ($absen)
-                    @foreach ($absen as $a)
+                    @if ($m)
+                    @foreach ($m as $a)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td>{{ $a->siswa->nama}}</td>
-                        <td> {{$a->keterangan}} </td>
+                        <td>{{ $a->nama}}</td>
+                        <td>@if($a->absensis->where('keterangan', 'Ijin')->whereBetween('tanggal', [$from,$to])->count() == 0) - @else {{ $a->absensis->where('keterangan', 'Ijin')->whereBetween('tanggal', [$from,$to])->count() }} @endif </td>
+                        <td>@if($a->absensis->where('keterangan', 'Sakit')->whereBetween('tanggal', [$from,$to])->count() == 0) - @else {{ $a->absensis->where('keterangan', 'Sakit')->whereBetween('tanggal', [$from,$to])->count() }} @endif</td>
+                        <td>@if($a->absensis->where('keterangan', 'Alfa')->whereBetween('tanggal', [$from,$to])->count() == 0) - @else {{ $a->absensis->where('keterangan', 'Alfa')->whereBetween('tanggal', [$from,$to])->count() }} @endif</td>
+                       
                       
                     </tr>
                     @endforeach

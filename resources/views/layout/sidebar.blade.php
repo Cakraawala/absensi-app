@@ -1,5 +1,5 @@
  <!-- Sidebar -->
- <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+ <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" style="height:100%;" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
@@ -19,6 +19,8 @@
             <span>Dashboard</span></a>
     </li>
 
+   
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -26,10 +28,22 @@
     <div class="sidebar-heading">
         Data
     </div>
+    <li class="nav-item {{ Request::is('admin*') ? 'active' : ''}}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone"
+            aria-expanded="true" aria-controls="collapseone">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Admin</span>
+        </a>
+        <div id="collapseone" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Inner</h6>
+                <a class="collapse-item" href="/admin">Data Admin</a>
+                <a class="collapse-item" href="/admin/create">Create</a>
+             
+            </div>
+        </div>
+    </li>
 
-    <!--
-
-    <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item {{ Request::is('absen*') ? 'active' : ''}}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseuser"
             aria-expanded="true" aria-controls="collapseuser">
@@ -41,13 +55,13 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">All</h6>
                 <a class="collapse-item" href="/absen">Absen</a>
-                <a class="collapse-item" href="/dashboard">Data Absen</a>
+                <!-- <a class="collapse-item" href="/dashboard">Data Absen</a> -->
 
             </div>
         </div>
     </li>
-{{--
-    Nav Item - Page s Collapse Menu --> --}}
+
+   
     <li class="nav-item {{ Request::is('siswa*') ? 'active' : ''}}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
@@ -59,7 +73,7 @@
                 <h6 class="collapse-header">Inner</h6>
                 <a class="collapse-item" href="/siswa">Data Siswa</a>
                 <a class="collapse-item" href="/siswa/create">Create</a>
-                {{-- <a class="collapse-item" href="/dashboard/type">Type Roo   m</a> --}}
+             
             </div>
         </div>
     </li>
@@ -73,10 +87,10 @@
 
 
     <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item  {{ Request::is('report*') ? 'active' : ''}}">
+        <a class="nav-link" href="/report">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
+            <span>Report</span></a>
     </li>
 
     <!-- Divider -->

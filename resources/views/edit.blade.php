@@ -11,18 +11,19 @@
             Absen {{ $tgl->format('D d/m/Y')}}
         </div>
         <div class="card-body">
-        <form action="/absen/post" method="POST">
+        <form action="/absen/{{ $absen->id_absensi }}/update" method="POST">
             @csrf
                     <label for="siswa" class="mt-2 form-label"> Nama Siswa <span style="font-style: italic;">(required)</span></label>
                         <select class="form-select" name="id_siswa" id="siswa">
-                            @foreach ($siswa as $s)
+                        <option value="{{ $absen->id_siswa }}" selected> {{ $absen->siswa->nama }} </option>    
+                        @foreach ($siswa as $s)
                             <option value="{{ $s->id_siswa }}">{{$s->nama}}</option>
                             @endforeach
                         </select>
 
                         <label for="Ket" class="mt-2 form-label">Keterangan <span style="font-style: italic;">(required)</span></label>
                         <select class="form-select" name="keterangan" id="Ket">
-                          <option value="">Pilih Keterangan</option>
+                          <option value="{{ $absen->keterangan }}">{{ $absen->keterangan }}</option>
                           <option value="Sakit">Sakit</option>
                           <option value="Ijin">Ijin</option>
                           <option value="Alfa">Alfa</option>

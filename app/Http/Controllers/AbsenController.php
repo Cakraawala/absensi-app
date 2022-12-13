@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AbsenController extends Controller
 {
@@ -38,31 +39,7 @@ class AbsenController extends Controller
         }
         $siswa = Siswa::whereNotIn('nama',$loop)->get();
         $tgl = Carbon::now();
-        // dd($users);
-
-
-        // dd($loop);
-        // $chart1 = Absensi::orderBy('id_absensi', 'asc')->get()->groupby(function ($chart1) {
-        //     return Carbon::parse($chart1->tanggal)->format('M');
-        // });
-
-        // $months = [];
-        // foreach($chart1 as $month => $value){
-        //     $months[] = $month;
-        //     // $p = [];
-        //     // foreach($value as $sp => $value1){
-        //     //     $p[] = $value1->tanggal;
-        //     // }
-        // }
-        // // dd($p);
-        // $reportmonth = Absensi::where('tanggal', $months)->get();
-
-        // dd($reportmonth);
-        // dd($chart1);
-        // dd($loop);
-        // $tes = Siswa::whereRaw('nama NOT IN(".$loop")')->get();
-        // dd($tes);
-
+    
         return view('absen', compact('siswa', 'tgl', 's'));
     }
 
@@ -94,6 +71,7 @@ class AbsenController extends Controller
             'tanggal' => 'required'
         ]);
         Absensi::create($request->all());
+        Alert::success('Success', 'Data berhasil Di BUat');
         return redirect('/');
     }
 
@@ -114,9 +92,22 @@ class AbsenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_absensi)
     {
-        //
+        if(!Auth::check()){
+            return redirect('/');
+        }
+        $today = Carbon::now()->format('Y/m/d');
+        $loop = [];
+        $s = Siswa::rightJoin('absensis', 'siswas.id_siswa', '=', 'absensis.id_siswa')->where('tanggal', $today)->get();
+        foreach($s as $ss => $value){
+            $loop[] = $value->nama;
+        }
+        $siswa = Siswa::whereNotIn('nama',$loop)->get();
+        $tgl = Carbon::now();
+        $absen = Absensi::where('id_absensi',$id_absensi)->first();
+        // dd($absen->id_siswa);
+         return view('edit', compact('absen', 'tgl','siswa'));
     }
 
     /**
@@ -126,9 +117,16 @@ class AbsenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_absensi)
     {
-        //
+        if(!Auth::check()){
+            return redirect('/');
+        }
+        $absen = Absensi::findOrFail($id_absensi);
+        // dd($absen);
+        $absen->update($request->all());
+        Alert::success('Success', 'Data berhasil Di Update');
+        return redirect('/dashboard');
     }
 
     /**
@@ -137,17 +135,24 @@ class AbsenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_absensi)
     {
-        //
+        $absen = Absensi::where('id_absensi',$id_absensi)->first();
+        // dd($absen);
+        $absen->delete($absen);
+        Alert::success('Success', 'Data berhasil dihapus');
+        return back();
     }
 
     public function report(){
         if(!Auth::check()){
             return redirect('/');
         }
+        $m = Siswa::get();
+        $from = '2022-06-01';
+        $to = '2023-06-01';
         $absen = Absensi::get();
-        return view('report', compact('absen'));
+        return view('report', compact('m','from','to'));
     }
     public function reportsearch(Request $request){
         if(!Auth::check()){
@@ -156,15 +161,11 @@ class AbsenController extends Controller
         $from = $request->from;
         $to = $request->to;
         // dd($cari);
-        $absen = Absensi::whereBetween('tanggal', [$from,$to])->get();
-        $siswa = [];
-        foreach($absen as $tes => $value){
-            $siswa[] = $value->siswa->nama;
-
-        }
-        // dd($siswa[0]);
-        $s = Siswa::rightJoin('absensis', 'siswas.id_siswa', '=', 'absensis.id_siswa')->whereBetween('tanggal', [$from, $to])->where('nama', $siswa)->where('keterangan', 'Ijin')->count();
-        // dd($siswa);
-        return view('report', compact('absen', 'request', 'from', 'to'));
+        // $absen = Absensi::->where('id_siswa', $id_siswa)->whereBetween('tanggal', [$from,$to])->get();
+        $m = Siswa::get();
+        // $from = '2022-10-05';
+        // $to = Carbon::now()->format('Y/m/d');
+        $absen = Absensi::get();
+        return view('report', compact('m', 'absen', 'from', 'to'));
     }
 }

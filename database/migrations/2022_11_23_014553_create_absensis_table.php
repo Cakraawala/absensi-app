@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('absensis', function (Blueprint $table) {
             $table->bigIncrements('id_absensi');
             $table->bigInteger('id_siswa')->unsigned()->index();
-            $table->foreign('id_siswa')->references('id_siswa')->on('siswas');
+            $table->foreign('id_siswa')->references('id_siswa')->on('siswas')->onDelete('cascade')->onUpdate('cascade');
             $table->string('keterangan');
             $table->date('tanggal');
             $table->timestamps();
