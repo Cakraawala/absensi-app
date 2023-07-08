@@ -14,7 +14,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data = User::get();
+        $id = auth()->user()->id_admin;
+        $data = User::whereNotIn('id_admin', [$id])->get();
+        // dd($data);
         return view('admin.index', compact('data'));
     }
 
@@ -86,7 +88,7 @@ class AdminController extends Controller
         $user->update($request->all());
         Alert::success('Success', 'Edit data berhasil');
         return redirect('/admin');
-     
+
     }
     public function changepassword(Request $request, User $user)
     {
