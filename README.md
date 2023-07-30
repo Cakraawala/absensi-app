@@ -22,14 +22,11 @@ Menyiapkan dan mensetting project absensi-app (laravel 9) require (Composer v2.2
 - Project Berhasil DiClone.
 
 ## Asset Foto
-![indexhome](https://user-images.githubusercontent.com/97875134/257033613-87be3c6b-8f0d-49c0-b6c7-f6c88c51a7ae.PNG)
-![indexhome2](https://user-images.githubusercontent.com/97875134/257033075-211bda89-eb41-4b5c-ae36-442620d8bfac.PNG)
-![kamars](https://user-images.githubusercontent.com/97875134/257033199-2a53e097-b386-43e6-8a2d-a733be593650.PNG)
-![kamar](https://user-images.githubusercontent.com/97875134/257033083-940fcb6a-144f-4b19-abc2-7eddf2adc472.PNG)
-![reservasi](https://user-images.githubusercontent.com/97875134/257033088-a17624e7-5cfd-4928-90fc-711e5c6e6a59.PNG)
-![dashboard](https://user-images.githubusercontent.com/97875134/257033092-d8dad41d-e120-484d-8ff6-e26e014bdf5e.PNG)
-![dataorder](https://user-images.githubusercontent.com/97875134/257033097-723f2a78-2d29-4d7f-84f6-eacb7625de6e.PNG)
-![myaccount](https://user-images.githubusercontent.com/97875134/257033089-a6f3c7e3-b59b-4993-8cb2-96c427fb31e1.PNG)
+![dashboard](https://user-images.githubusercontent.com/97875134/257035445-33c0820d-35d2-4c26-afec-116ee1353653.PNG)
+![absen](https://user-images.githubusercontent.com/97875134/257035447-dc771715-68cd-4d43-a14f-238d638dcb4b.PNG)
+![datasiswa](https://user-images.githubusercontent.com/97875134/257035453-55a54779-7c0e-43bf-8ef0-1ca5594f0c69.PNG)
+![tambahsiswa](https://user-images.githubusercontent.com/97875134/257035458-06df4329-ec23-4bd4-a596-d75772b60df8.PNG)
+![laporan](https://user-images.githubusercontent.com/97875134/257035459-d7c8ac5e-3eb6-4275-9d67-3c887451db60.PNG)
 
 
 ## License
